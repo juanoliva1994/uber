@@ -71,12 +71,13 @@ create sequence Liquidacion_seq
 	
 ------------------------------------------ CREACIÃ“N DE TABLAS -------------------------------------------------------------
 
-
+-- Tabla de Paises
 CREATE table Paises(
 	ID integer primary key not null,
 	Nombre varchar(64)
 );
 
+--Tabla de ciudades
 CREATE table Ciudades(
 	ID integer primary key not null,
 	Nombre varchar(64),
@@ -85,6 +86,7 @@ CREATE table Ciudades(
     REFERENCES Paises(ID)
 );
 
+--tabla compaÃ±ias
 Create table Companias(
 	ID integer primary key not null,
 	Nombre varchar(64),
@@ -110,7 +112,7 @@ create Table Clientes(
     REFERENCES Companias(ID)
 );
 
-
+--tabla medios de pagos
 Create table Medios_de_pago(
 	ID integer primary key not null,
 	Nombre varchar(64),
@@ -123,7 +125,7 @@ Create table Medios_de_pago(
     REFERENCES Companias(ID)
 );
 
-
+--tabla codigos promocion
 CREATE table Codigos_promocion(
 	ID integer primary key not null,
 	Codigo varchar(8),
@@ -712,7 +714,7 @@ insert into Paises (id, Nombre) values (498, 'Vietnam');
 insert into Paises (id, Nombre) values (499, 'Nigeria');
 insert into Paises (id, Nombre) values (500, 'Czech Republic');
 
--- Inserción de datos de ciudades
+-- Inserciï¿½n de datos de ciudades
 insert into Ciudades (id, Nombre, ID_pais) values (1, 'Moriya', 1);
 insert into Ciudades (id, Nombre, ID_pais) values (2, 'Shicong', 2);
 insert into Ciudades (id, Nombre, ID_pais) values (3, 'Tilburg', 3);
@@ -723,7 +725,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (7, 'Banjar Buahan', 7);
 insert into Ciudades (id, Nombre, ID_pais) values (8, 'LubaczÃ³w', 8);
 insert into Ciudades (id, Nombre, ID_pais) values (9, 'Kamennyye Potoki', 9);
 insert into Ciudades (id, Nombre, ID_pais) values (10, 'Wantan', 10);
-insert into Ciudades (id, Nombre, ID_pais) values (11, 'JarÄ?nwÄ?la', 11);
+insert into Ciudades (id, Nombre, ID_pais) values (11, 'Jarï¿½?nwï¿½?la', 11);
 insert into Ciudades (id, Nombre, ID_pais) values (12, 'Satinka', 12);
 insert into Ciudades (id, Nombre, ID_pais) values (13, 'WodzisÅ‚aw ÅšlÄ…ski', 13);
 insert into Ciudades (id, Nombre, ID_pais) values (14, 'Nanzhen', 14);
@@ -761,7 +763,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (45, 'Cileles', 45);
 insert into Ciudades (id, Nombre, ID_pais) values (46, 'Fuliang', 46);
 insert into Ciudades (id, Nombre, ID_pais) values (47, 'Banjar Sedang', 47);
 insert into Ciudades (id, Nombre, ID_pais) values (48, 'Sevsk', 48);
-insert into Ciudades (id, Nombre, ID_pais) values (49, 'KamojimachÅ?-jÅ?gejima', 49);
+insert into Ciudades (id, Nombre, ID_pais) values (49, 'Kamojimachï¿½?-jï¿½?gejima', 49);
 insert into Ciudades (id, Nombre, ID_pais) values (50, 'Heret', 50);
 insert into Ciudades (id, Nombre, ID_pais) values (51, 'Vostok', 51);
 insert into Ciudades (id, Nombre, ID_pais) values (52, 'Tuapukan', 52);
@@ -780,7 +782,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (64, 'Czerwin', 64);
 insert into Ciudades (id, Nombre, ID_pais) values (65, 'Wamba', 65);
 insert into Ciudades (id, Nombre, ID_pais) values (66, 'Chibombo', 66);
 insert into Ciudades (id, Nombre, ID_pais) values (67, 'Derventa', 67);
-insert into Ciudades (id, Nombre, ID_pais) values (68, 'BaghlÄ?n', 68);
+insert into Ciudades (id, Nombre, ID_pais) values (68, 'Baghlï¿½?n', 68);
 insert into Ciudades (id, Nombre, ID_pais) values (69, 'Tongshanxiang', 69);
 insert into Ciudades (id, Nombre, ID_pais) values (70, 'LimenÃ¡ria', 70);
 insert into Ciudades (id, Nombre, ID_pais) values (71, 'Oslo', 71);
@@ -831,7 +833,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (115, 'Pangkalan Kasai', 115);
 insert into Ciudades (id, Nombre, ID_pais) values (116, 'Kayangel', 116);
 insert into Ciudades (id, Nombre, ID_pais) values (117, 'Zmeyskaya', 117);
 insert into Ciudades (id, Nombre, ID_pais) values (118, 'HuitÃ¡n', 118);
-insert into Ciudades (id, Nombre, ID_pais) values (119, 'Dayr MawÄ?s', 119);
+insert into Ciudades (id, Nombre, ID_pais) values (119, 'Dayr Mawï¿½?s', 119);
 insert into Ciudades (id, Nombre, ID_pais) values (120, 'Qinglung', 120);
 insert into Ciudades (id, Nombre, ID_pais) values (121, 'TÃ¡la', 121);
 insert into Ciudades (id, Nombre, ID_pais) values (122, 'Melchor de Mencos', 122);
@@ -881,11 +883,11 @@ insert into Ciudades (id, Nombre, ID_pais) values (165, 'Dundrum', 165);
 insert into Ciudades (id, Nombre, ID_pais) values (166, 'Dedza', 166);
 insert into Ciudades (id, Nombre, ID_pais) values (167, 'Yanzhao', 167);
 insert into Ciudades (id, Nombre, ID_pais) values (168, 'Pervomayskoye', 168);
-insert into Ciudades (id, Nombre, ID_pais) values (169, 'HannÅ?', 169);
+insert into Ciudades (id, Nombre, ID_pais) values (169, 'Hannï¿½?', 169);
 insert into Ciudades (id, Nombre, ID_pais) values (170, 'Banjar Tegal Belodan', 170);
 insert into Ciudades (id, Nombre, ID_pais) values (171, 'Kanie', 171);
 insert into Ciudades (id, Nombre, ID_pais) values (172, 'Helsingborg', 172);
-insert into Ciudades (id, Nombre, ID_pais) values (173, 'Dowr-e RabÄ?Å£', 173);
+insert into Ciudades (id, Nombre, ID_pais) values (173, 'Dowr-e Rabï¿½?Å£', 173);
 insert into Ciudades (id, Nombre, ID_pais) values (174, 'NiÃ±os Heroes', 174);
 insert into Ciudades (id, Nombre, ID_pais) values (175, 'Knivsta', 175);
 insert into Ciudades (id, Nombre, ID_pais) values (176, 'LÃ©gua', 176);
@@ -917,7 +919,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (201, 'GÃ¶teborg', 201);
 insert into Ciudades (id, Nombre, ID_pais) values (202, 'Ergates', 202);
 insert into Ciudades (id, Nombre, ID_pais) values (203, 'Mataquescuintla', 203);
 insert into Ciudades (id, Nombre, ID_pais) values (204, 'Catujal Velho', 204);
-insert into Ciudades (id, Nombre, ID_pais) values (205, 'RyÅ«Å?', 205);
+insert into Ciudades (id, Nombre, ID_pais) values (205, 'RyÅ«ï¿½?', 205);
 insert into Ciudades (id, Nombre, ID_pais) values (206, 'Kalej', 206);
 insert into Ciudades (id, Nombre, ID_pais) values (207, 'Sake', 207);
 insert into Ciudades (id, Nombre, ID_pais) values (208, 'Mengcheng Chengguanzhen', 208);
@@ -950,7 +952,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (234, 'Selat', 234);
 insert into Ciudades (id, Nombre, ID_pais) values (235, 'Wolometang', 235);
 insert into Ciudades (id, Nombre, ID_pais) values (236, 'Negreiros', 236);
 insert into Ciudades (id, Nombre, ID_pais) values (237, 'Lyon', 237);
-insert into Ciudades (id, Nombre, ID_pais) values (238, 'ViÄ¼Ä?ni', 238);
+insert into Ciudades (id, Nombre, ID_pais) values (238, 'ViÄ¼ï¿½?ni', 238);
 insert into Ciudades (id, Nombre, ID_pais) values (239, 'Guilhabreu', 239);
 insert into Ciudades (id, Nombre, ID_pais) values (240, 'Dumlan', 240);
 insert into Ciudades (id, Nombre, ID_pais) values (241, 'Siraway', 241);
@@ -1069,7 +1071,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (353, 'Torres Vedras', 353);
 insert into Ciudades (id, Nombre, ID_pais) values (354, 'Melbourne', 354);
 insert into Ciudades (id, Nombre, ID_pais) values (355, 'Zheshart', 355);
 insert into Ciudades (id, Nombre, ID_pais) values (356, 'Qiancheng', 356);
-insert into Ciudades (id, Nombre, ID_pais) values (357, 'Al MÄ?likÄ«yah', 357);
+insert into Ciudades (id, Nombre, ID_pais) values (357, 'Al Mï¿½?likÄ«yah', 357);
 insert into Ciudades (id, Nombre, ID_pais) values (358, 'Bastia', 358);
 insert into Ciudades (id, Nombre, ID_pais) values (359, 'Davydovo', 359);
 insert into Ciudades (id, Nombre, ID_pais) values (360, 'Przasnysz', 360);
@@ -1133,7 +1135,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (417, 'eMbalenhle', 417);
 insert into Ciudades (id, Nombre, ID_pais) values (418, 'Yuantan', 418);
 insert into Ciudades (id, Nombre, ID_pais) values (419, 'Santiago', 419);
 insert into Ciudades (id, Nombre, ID_pais) values (420, 'Klinan', 420);
-insert into Ciudades (id, Nombre, ID_pais) values (421, 'JarÄ?nwÄ?la', 421);
+insert into Ciudades (id, Nombre, ID_pais) values (421, 'Jarï¿½?nwï¿½?la', 421);
 insert into Ciudades (id, Nombre, ID_pais) values (422, 'Kwale', 422);
 insert into Ciudades (id, Nombre, ID_pais) values (423, 'Al JabÄ«n', 423);
 insert into Ciudades (id, Nombre, ID_pais) values (424, 'MakrÃ½gialos', 424);
@@ -1153,7 +1155,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (437, 'Chimbas', 437);
 insert into Ciudades (id, Nombre, ID_pais) values (438, 'Limanowa', 438);
 insert into Ciudades (id, Nombre, ID_pais) values (439, 'Hewa', 439);
 insert into Ciudades (id, Nombre, ID_pais) values (440, 'Yicheng', 440);
-insert into Ciudades (id, Nombre, ID_pais) values (441, 'QalandiyÄ?', 441);
+insert into Ciudades (id, Nombre, ID_pais) values (441, 'Qalandiyï¿½?', 441);
 insert into Ciudades (id, Nombre, ID_pais) values (442, 'Renhe', 442);
 insert into Ciudades (id, Nombre, ID_pais) values (443, 'San Carlos', 443);
 insert into Ciudades (id, Nombre, ID_pais) values (444, 'CrÃ©teil', 444);
@@ -1162,7 +1164,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (446, 'Massy', 446);
 insert into Ciudades (id, Nombre, ID_pais) values (447, 'MikulÃ¡Å¡ovice', 447);
 insert into Ciudades (id, Nombre, ID_pais) values (448, 'Tongbang', 448);
 insert into Ciudades (id, Nombre, ID_pais) values (449, 'Mishima', 449);
-insert into Ciudades (id, Nombre, ID_pais) values (450, 'GorgÄ?n', 450);
+insert into Ciudades (id, Nombre, ID_pais) values (450, 'Gorgï¿½?n', 450);
 insert into Ciudades (id, Nombre, ID_pais) values (451, 'SÃ£o Mateus do MaranhÃ£o', 451);
 insert into Ciudades (id, Nombre, ID_pais) values (452, 'Obrera', 452);
 insert into Ciudades (id, Nombre, ID_pais) values (453, 'Dengfeng', 453);
@@ -1214,7 +1216,7 @@ insert into Ciudades (id, Nombre, ID_pais) values (498, 'Bagani', 498);
 insert into Ciudades (id, Nombre, ID_pais) values (499, 'Å»arki', 499);
 insert into Ciudades (id, Nombre, ID_pais) values (500, 'YatÃ©-Barrage', 500);
 
--- Inserción de compañias
+-- Inserciï¿½n de compaï¿½ias
 insert into Companias (id, Nombre, Direccion) values (1, 'Twimm', '4 6th Drive');
 insert into Companias (id, Nombre, Direccion) values (2, 'Feedspan', '137 Schmedeman Hill');
 insert into Companias (id, Nombre, Direccion) values (3, 'Brainsphere', '953 Shopko Terrace');
@@ -1716,14 +1718,14 @@ insert into Companias (id, Nombre, Direccion) values (498, 'Bluejam', '4944 Loft
 insert into Companias (id, Nombre, Direccion) values (499, 'Gigashots', '2740 Boyd Terrace');
 insert into Companias (id, Nombre, Direccion) values (500, 'Jatri', '854 Manley Alley');
 
--- Inserción de Clientes
+-- Inserciï¿½n de Clientes
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (1, 'Kelley Simister', 'Assamese', 'http://dummyimage.com/122x169.jpg/ff4444/ffffff', '6743351151', 'ksimister0@economist.com', 'ksimister0@imageshack.us', 10055644, 1, 1, 1);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (2, 'Hiram Terney', 'Zulu', 'http://dummyimage.com/151x101.png/ff4444/ffffff', '6747204637', 'hterney1@moonfruit.com', 'hterney1@census.gov', 10477794, 1, 2, 2);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (3, 'Orren Seger', 'Kannada', 'http://dummyimage.com/167x163.jpg/5fa2dd/ffffff', '7629431615', 'oseger2@hp.com', 'oseger2@alexa.com', 10148651, 1, 3, 3);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (4, 'Alejandra Gerbel', 'Nepali', 'http://dummyimage.com/155x196.png/cc0000/ffffff', '2013258371', 'agerbel3@wordpress.org', 'agerbel3@aboutads.info', 10388970, 1, 4, 4);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (5, 'Agosto Lyes', 'Kurdish', 'http://dummyimage.com/198x151.jpg/dddddd/000000', '3373913239', 'alyes4@alibaba.com', 'alyes4@theatlantic.com', 10163761, 0, 5, 5);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (6, 'Karry Seally', 'Catalan', 'http://dummyimage.com/238x218.png/ff4444/ffffff', '9172115888', 'kseally5@freewebs.com', 'kseally5@desdev.cn', 10296244, 1, 6, 6);
-insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (7, 'Kale Fallawe', 'MÄ?ori', 'http://dummyimage.com/196x146.bmp/ff4444/ffffff', '1798372485', 'kfallawe6@bandcamp.com', 'kfallawe6@usda.gov', 10067417, 0, 7, 7);
+insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (7, 'Kale Fallawe', 'Mï¿½?ori', 'http://dummyimage.com/196x146.bmp/ff4444/ffffff', '1798372485', 'kfallawe6@bandcamp.com', 'kfallawe6@usda.gov', 10067417, 0, 7, 7);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (8, 'Augy Butterly', 'Czech', 'http://dummyimage.com/231x217.bmp/ff4444/ffffff', '9533481643', 'abutterly7@paypal.com', 'abutterly7@multiply.com', 10936164, 0, 8, 8);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (9, 'Karla Spikins', 'Haitian Creole', 'http://dummyimage.com/146x103.bmp/ff4444/ffffff', '3309164875', 'kspikins8@walmart.com', 'kspikins8@symantec.com', 10346614, 0, 9, 9);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (10, 'Ely Titherington', 'Spanish', 'http://dummyimage.com/106x125.png/ff4444/ffffff', '9182855637', 'etitherington9@stumbleupon.com', 'etitherington9@vistaprint.com', 10525591, 0, 10, 10);
@@ -1758,7 +1760,7 @@ insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codig
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (39, 'Kyle Smithend', 'Albanian', 'http://dummyimage.com/211x131.png/cc0000/ffffff', '3585462618', 'ksmithend12@seattletimes.com', 'ksmithend12@ebay.co.uk', 10596948, 0, 39, 39);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (40, 'Lorilyn Kabos', 'Dzongkha', 'http://dummyimage.com/137x230.bmp/5fa2dd/ffffff', '5484716597', 'lkabos13@miitbeian.gov.cn', 'lkabos13@lulu.com', 10496937, 0, 40, 40);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (41, 'Zarla Loreit', 'New Zealand Sign Language', 'http://dummyimage.com/205x156.png/ff4444/ffffff', '4707177164', 'zloreit14@cdbaby.com', 'zloreit14@parallels.com', 10220540, 1, 41, 41);
-insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (42, 'Galven Perin', 'MÄ?ori', 'http://dummyimage.com/244x163.bmp/dddddd/000000', '6624706858', 'gperin15@cbc.ca', 'gperin15@elegantthemes.com', 10967321, 1, 42, 42);
+insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (42, 'Galven Perin', 'Mï¿½?ori', 'http://dummyimage.com/244x163.bmp/dddddd/000000', '6624706858', 'gperin15@cbc.ca', 'gperin15@elegantthemes.com', 10967321, 1, 42, 42);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (43, 'Tonya Dodshon', 'Latvian', 'http://dummyimage.com/138x103.bmp/ff4444/ffffff', '2459519914', 'tdodshon16@guardian.co.uk', 'tdodshon16@soup.io', 10102261, 0, 43, 43);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (44, 'Ursula Bibbie', 'Tajik', 'http://dummyimage.com/235x198.jpg/cc0000/ffffff', '8847500214', 'ubibbie17@craigslist.org', 'ubibbie17@globo.com', 10566731, 1, 44, 44);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (45, 'Gerald Fandrey', 'Chinese', 'http://dummyimage.com/150x135.jpg/ff4444/ffffff', '2193467123', 'gfandrey18@networkadvertising.org', 'gfandrey18@webnode.com', 10509339, 1, 45, 45);
@@ -2027,7 +2029,7 @@ insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codig
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (308, 'De Bunton', 'Kannada', 'http://dummyimage.com/144x196.jpg/ff4444/ffffff', '2691102195', 'dbunton8j@topsy.com', 'dbunton8j@sciencedaily.com', 10768929, 0, 308, 308);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (309, 'Con Dowdam', 'New Zealand Sign Language', 'http://dummyimage.com/128x231.png/cc0000/ffffff', '4544291277', 'cdowdam8k@sun.com', 'cdowdam8k@cdc.gov', 10713893, 0, 309, 309);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (310, 'Crichton Bozier', 'Dari', 'http://dummyimage.com/173x213.bmp/5fa2dd/ffffff', '9221078491', 'cbozier8l@ucla.edu', 'cbozier8l@un.org', 10012392, 0, 310, 310);
-insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (311, 'Isabelita Haslock', 'MÄ?ori', 'http://dummyimage.com/218x125.png/ff4444/ffffff', '9578315483', 'ihaslock8m@netscape.com', 'ihaslock8m@sciencedirect.com', 10119198, 1, 311, 311);
+insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (311, 'Isabelita Haslock', 'Mï¿½?ori', 'http://dummyimage.com/218x125.png/ff4444/ffffff', '9578315483', 'ihaslock8m@netscape.com', 'ihaslock8m@sciencedirect.com', 10119198, 1, 311, 311);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (312, 'Krystyna Imbrey', 'Danish', 'http://dummyimage.com/222x238.bmp/cc0000/ffffff', '3259403048', 'kimbrey8n@e-recht24.de', 'kimbrey8n@wsj.com', 10880280, 1, 312, 312);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (313, 'Moira Sterricks', 'German', 'http://dummyimage.com/199x101.jpg/ff4444/ffffff', '8011605775', 'msterricks8o@cloudflare.com', 'msterricks8o@usa.gov', 10571251, 1, 313, 313);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (314, 'Lukas Langridge', 'Greek', 'http://dummyimage.com/103x241.bmp/ff4444/ffffff', '2141927778', 'llangridge8p@ucoz.ru', 'llangridge8p@mail.ru', 10388119, 0, 314, 314);
@@ -2218,7 +2220,7 @@ insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codig
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (499, 'Langsdon Cumberbatch', 'Hebrew', 'http://dummyimage.com/120x173.bmp/5fa2dd/ffffff', '4231701034', 'lcumberbatchdu@dropbox.com', 'lcumberbatchdu@storify.com', 10523595, 1, 499, 499);
 insert into Clientes (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, ID_Compania) values (500, 'Zarla Keigher', 'Tajik', 'http://dummyimage.com/173x202.png/5fa2dd/ffffff', '9453537477', 'zkeigherdv@123-reg.co.uk', 'zkeigherdv@tripadvisor.com', 10412326, 1, 500, 500);
 
--- Inserción Medios de Pago
+-- Inserciï¿½n Medios de Pago
 insert into Medios_de_pago (id, Nombre, Detalle, ID_cliente, ID_Compania) values (1, 'TDC Visa', '341153946462889', 1, null);
 insert into Medios_de_pago (id, Nombre, Detalle, ID_cliente, ID_Compania) values (2, 'TDC Amex', '3529439387003102', 2, null);
 insert into Medios_de_pago (id, Nombre, Detalle, ID_cliente, ID_Compania) values (3, 'TDC MasterCard', '564182365796705095', 3, null);
@@ -2720,7 +2722,7 @@ insert into Medios_de_pago (id, Nombre, Detalle, ID_cliente, ID_Compania) values
 insert into Medios_de_pago (id, Nombre, Detalle, ID_cliente, ID_Compania) values (499, 'TDC Visa', '6395332182256773', 499, 257);
 insert into Medios_de_pago (id, Nombre, Detalle, ID_cliente, ID_Compania) values (500, 'TDC MasterCard', '3564197042698031', 500, null);
 
--- Insercción Códigos de promoción
+-- Insercciï¿½n Cï¿½digos de promociï¿½n
 insert into Codigos_promocion (id, Codigo, ID_cliente) values (1, 81694936, 1);
 insert into Codigos_promocion (id, Codigo, ID_cliente) values (2, 17437777, 2);
 insert into Codigos_promocion (id, Codigo, ID_cliente) values (3, 22310568, 3);
@@ -2822,11 +2824,11 @@ insert into Codigos_promocion (id, Codigo, ID_cliente) values (98, 98765158, 98)
 insert into Codigos_promocion (id, Codigo, ID_cliente) values (99, 89370650, 99);
 insert into Codigos_promocion (id, Codigo, ID_cliente) values (100, 53436047, 100);
 
--- Inserción Servicios
+-- Inserciï¿½n Servicios
 insert into Servicios (id, Nombre) values (1, 'UberX');
 insert into Servicios (id, Nombre) values (2, 'Ubler Black');
 
--- Insercción Vehiculos
+-- Insercciï¿½n Vehiculos
 insert into Vehiculos (id, ID_servicio, Placa, Modelo, Marca, Ano) values (1, 1, 485029, 2007, 'Toyota', 1995);
 insert into Vehiculos (id, ID_servicio, Placa, Modelo, Marca, Ano) values (2, 2, 510142, 2012, 'Nissan', 2013);
 insert into Vehiculos (id, ID_servicio, Placa, Modelo, Marca, Ano) values (3, 1, 353601, 1996, 'Toyota', 1992);
@@ -3328,8 +3330,8 @@ insert into Vehiculos (id, ID_servicio, Placa, Modelo, Marca, Ano) values (498, 
 insert into Vehiculos (id, ID_servicio, Placa, Modelo, Marca, Ano) values (499, 1, 519922, 2001, 'Dodge', 1995);
 insert into Vehiculos (id, ID_servicio, Placa, Modelo, Marca, Ano) values (500, 2, 703899, 2006, 'GMC', 1993);
 
--- Insercción de Conductores
-insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (1, 'Kamila Gillicuddy', 'MÄ?ori', 'http://dummyimage.com/238x208.jpg/dddddd/000000', '7011551978', 'kgillicuddy0@mediafire.com', 'kgillicuddy0@amazon.com', 39743088, 0, 1, '3569803994092298');
+-- Insercciï¿½n de Conductores
+insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (1, 'Kamila Gillicuddy', 'Mï¿½?ori', 'http://dummyimage.com/238x208.jpg/dddddd/000000', '7011551978', 'kgillicuddy0@mediafire.com', 'kgillicuddy0@amazon.com', 39743088, 0, 1, '3569803994092298');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (2, 'Boris Koppke', 'German', 'http://dummyimage.com/168x188.jpg/ff4444/ffffff', '7455937381', 'bkoppke1@unc.edu', 'bkoppke1@google.ru', 42400485, 1, 2, '3561144939228723');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (3, 'Brandi Corradetti', 'Haitian Creole', 'http://dummyimage.com/155x201.png/dddddd/000000', '3286471445', 'bcorradetti2@webnode.com', 'bcorradetti2@tmall.com', 40348441, 1, 3, '3546999763761507');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (4, 'Corabelle Rosencrantz', 'Thai', 'http://dummyimage.com/154x144.png/ff4444/ffffff', '5419972724', 'crosencrantz3@usatoday.com', 'crosencrantz3@google.de', 59246179, 0, 4, '3583065689073510');
@@ -3354,7 +3356,7 @@ insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Co
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (23, 'Gino Juara', 'Polish', 'http://dummyimage.com/241x169.png/5fa2dd/ffffff', '6524335040', 'gjuaram@reuters.com', 'gjuaram@elegantthemes.com', 53845549, 1, 23, '3548534699222775');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (24, 'Gherardo Blakeslee', 'English', 'http://dummyimage.com/196x148.bmp/ff4444/ffffff', '6611428785', 'gblakesleen@yandex.ru', 'gblakesleen@webnode.com', 13668783, 0, 24, '560223783344851337');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (25, 'Leona Cleve', 'Northern Sotho', 'http://dummyimage.com/190x108.jpg/5fa2dd/ffffff', '4907841817', 'lcleveo@microsoft.com', 'lcleveo@dedecms.com', 18166542, 0, 25, '3533890265254957');
-insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (26, 'Keefe Lamberti', 'MÄ?ori', 'http://dummyimage.com/105x243.bmp/cc0000/ffffff', '8741647974', 'klambertip@vimeo.com', 'klambertip@wufoo.com', 29148403, 0, 26, '3553686970071131');
+insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (26, 'Keefe Lamberti', 'Mï¿½?ori', 'http://dummyimage.com/105x243.bmp/cc0000/ffffff', '8741647974', 'klambertip@vimeo.com', 'klambertip@wufoo.com', 29148403, 0, 26, '3553686970071131');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (27, 'Rosy Jewett', 'Danish', 'http://dummyimage.com/141x200.bmp/ff4444/ffffff', '9538626183', 'rjewettq@intel.com', 'rjewettq@nhs.uk', 12754317, 1, 27, '30440973116082');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (28, 'Sonny Parradine', 'Zulu', 'http://dummyimage.com/165x130.jpg/ff4444/ffffff', '7287269257', 'sparradiner@ucsd.edu', 'sparradiner@chronoengine.com', 44651379, 0, 28, '201955545948210');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (29, 'Curry Heningam', 'Nepali', 'http://dummyimage.com/149x132.jpg/cc0000/ffffff', '3094858553', 'cheningams@ifeng.com', 'cheningams@oaic.gov.au', 37927906, 1, 29, '3554543095767698');
@@ -3381,7 +3383,7 @@ insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Co
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (50, 'Beitris Dudney', 'Sotho', 'http://dummyimage.com/138x182.bmp/ff4444/ffffff', '9343018280', 'bdudney1d@blogs.com', 'bdudney1d@tumblr.com', 23738115, 0, 50, '374288507692373');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (51, 'Bradford Gate', 'Dzongkha', 'http://dummyimage.com/159x168.bmp/5fa2dd/ffffff', '1717037976', 'bgate1e@netscape.com', 'bgate1e@wisc.edu', 17687838, 0, 51, '3566759819860306');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (52, 'Marketa Rauprich', 'Thai', 'http://dummyimage.com/202x159.png/cc0000/ffffff', '8044685519', 'mrauprich1f@weebly.com', 'mrauprich1f@yelp.com', 12242493, 0, 52, '58934160065741085');
-insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (53, 'Kearney Rimer', 'MÄ?ori', 'http://dummyimage.com/247x230.bmp/dddddd/000000', '3122591297', 'krimer1g@who.int', 'krimer1g@google.ru', 42668562, 0, 53, '5602255843993534216');
+insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (53, 'Kearney Rimer', 'Mï¿½?ori', 'http://dummyimage.com/247x230.bmp/dddddd/000000', '3122591297', 'krimer1g@who.int', 'krimer1g@google.ru', 42668562, 0, 53, '5602255843993534216');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (54, 'Orren Cops', 'Khmer', 'http://dummyimage.com/229x135.bmp/5fa2dd/ffffff', '4028290319', 'ocops1h@google.co.jp', 'ocops1h@ihg.com', 31932784, 1, 54, '3585982446301935');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (55, 'Janaya Ruggier', 'Sotho', 'http://dummyimage.com/159x161.jpg/dddddd/000000', '2145195008', 'jruggier1i@pinterest.com', 'jruggier1i@bing.com', 49415571, 1, 55, '3536183298763971');
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (56, 'Odille Dilloway', 'Japanese', 'http://dummyimage.com/112x229.png/5fa2dd/ffffff', '2332191975', 'odilloway1j@nsw.gov.au', 'odilloway1j@live.com', 25397273, 0, 56, '4508559973647187');
@@ -3431,7 +3433,7 @@ insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Co
 insert into Conductores (id, Nombre, Lenguaje, Foto, Celular, Email1, Email2, Codigo_invitacion, Indicador_recibos, ID_pais, Cuenta_pago) values (100, 'Adey Mackiewicz', 'Swahili', 'http://dummyimage.com/225x123.png/cc0000/ffffff', '5763348957', 'amackiewicz2r@mapy.cz', 'amackiewicz2r@qq.com', 50958031, 0, 100, '6759679125658980');
 
 
--- Insercción de carros por conductor
+-- Insercciï¿½n de carros por conductor
 insert into Conductores_y_vehiculos (ID_conductor, ID_vehiculo) values (1, 422);
 insert into Conductores_y_vehiculos (ID_conductor, ID_vehiculo) values (2, 460);
 insert into Conductores_y_vehiculos (ID_conductor, ID_vehiculo) values (3, 491);
@@ -3533,7 +3535,7 @@ insert into Conductores_y_vehiculos (ID_conductor, ID_vehiculo) values (98, 492)
 insert into Conductores_y_vehiculos (ID_conductor, ID_vehiculo) values (99, 427);
 insert into Conductores_y_vehiculos (ID_conductor, ID_vehiculo) values (100, 438);
 
--- Insercción de Viajes
+-- Insercciï¿½n de Viajes
 insert into Viajes (ID, Fecha, Distancia, Tiempo_recorrido, Total, Subtotal, Hora_salida, Hora_llegada, Origen, Destino, ID_conductor, ID_servicio, ID_medioPago, ID_ciudad) values (1, '03/10/2017', 63, '12/01/2018', 45357, 91660, '16/11/2018', '15/07/2018', 56.5201848, 34.9410177, 69, 2, 269, 213);
 insert into Viajes (ID, Fecha, Distancia, Tiempo_recorrido, Total, Subtotal, Hora_salida, Hora_llegada, Origen, Destino, ID_conductor, ID_servicio, ID_medioPago, ID_ciudad) values (2, '12/09/2016', 27, '13/07/2018', 191454, 71929, '03/05/2016', '19/07/2018', 14.8857071, -90.9087455, 65, 2, 14, 88);
 insert into Viajes (ID, Fecha, Distancia, Tiempo_recorrido, Total, Subtotal, Hora_salida, Hora_llegada, Origen, Destino, ID_conductor, ID_servicio, ID_medioPago, ID_ciudad) values (3, '19/11/2016', 37, '02/04/2018', 32621, 10125, '17/03/2016', '14/11/2017', 25.112406, 110.446979, 100, 2, 296, 245);
@@ -3585,7 +3587,7 @@ insert into Viajes (ID, Fecha, Distancia, Tiempo_recorrido, Total, Subtotal, Hor
 insert into Viajes (ID, Fecha, Distancia, Tiempo_recorrido, Total, Subtotal, Hora_salida, Hora_llegada, Origen, Destino, ID_conductor, ID_servicio, ID_medioPago, ID_ciudad) values (49, '23/11/2018', 79, '12/12/2017', 89489, 77144, '19/12/2015', '12/12/2017', -25.6262174, -57.1520642, 73, 1, 109, 141);
 insert into Viajes (ID, Fecha, Distancia, Tiempo_recorrido, Total, Subtotal, Hora_salida, Hora_llegada, Origen, Destino, ID_conductor, ID_servicio, ID_medioPago, ID_ciudad) values (50, '09/07/2017', 31, '02/09/2016', 78515, 21178, '13/07/2016', '12/01/2018', 38.6271104, -9.0346456, 33, 1, 149, 478);
 
--- Inseeción de Liqudaciones
+-- Inseeciï¿½n de Liqudaciones
 insert into Liquidacion (ID, Fecha, ID_conductor, Total) values (1, '18/02/2018', 73, 519042);
 insert into Liquidacion (ID, Fecha, ID_conductor, Total) values (2, '22/03/2016', 74, 951938);
 insert into Liquidacion (ID, Fecha, ID_conductor, Total) values (3, '14/06/2018', 17, 563237);
@@ -3612,7 +3614,7 @@ insert into Liquidacion (ID, Fecha, ID_conductor, Total) values (20, '13/05/2016
 
 
 
-
+select * from viajes;
 
 
 
