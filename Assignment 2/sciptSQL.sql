@@ -40,6 +40,34 @@ CREATE OR REPLACE VIEW VIAJES_CLIENTES AS
   INNER JOIN CLIENTES     ON CLIENTES.ID            = VIAJES.ID_CLIENTE
   ORDER BY VIAJES.HORA_SALIDA DESC;
   
+  
+--5) Crear la funcion llamada VALOR_DISTANCIA.
+
+CREATE OR REPLACE FUNCTION VALOR_DISTANCIA(Distancia float,Ciudad string)
+    RETURN FLOAT
+    AS
+    Valorkm float;
+    Total_por_km float;
+    BEGIN
+    --Se valida que la distancia no sea menor a 0
+        IF DISTANCIA < 0
+          THEN 
+            DBMS_OUTPUT.put_line('ERROR: DISTANCIA MENOR A 0');
+            RETURN NULL;
+        END IF;
+        --Se obtiene el valor por kilometro
+        Select Valor_por_km into Valorkm  from Ciudades
+            where Nombre = Ciudad;
+        --Se calcula el total    
+        Total_por_km := Valorkm * Distancia;  
+        return Total_por_km;
+        --Se valida si el qry no encuentra datos se controla el error con el exeption
+        EXCEPTION
+          WHEN NO_DATA_FOUND
+            THEN DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+      
+    END;
+  
 -- 6) Funcion que permite recibir como parámetros de entrada una ciudad y una cantidad de minutos.
 -- con éstos 2 datos se calcula un valor que equivale a el valor que cuesta un minuto en la ciudad recibida por
 -- la cantidad de minutos que se recibe.
@@ -49,19 +77,19 @@ CREATE OR REPLACE FUNCTION VALOR_TIEMPO(MINUTOS float,Ciudad string)
     ValorMIN float;
     Total_por_MIN float;
     BEGIN
-    
+    --Se valida que los minutos no sean menor a 0
         IF MINUTOS < 0
           THEN 
             DBMS_OUTPUT.put_line('ERROR: MINUTOS MENOR A 0');
             RETURN NULL;
         END IF;
-        
+        --Se consulta el valor por minuto
         Select Valor_por_minuto into ValorMIN  from Ciudades
             where Nombre = Ciudad;
-            
+        --Se calcula el total    
         Total_por_MIN := ValorMIN * MINUTOS;  
         return Total_por_MIN;
-        
+        --Se controla la exepciones si no encuentra data el qry
         EXCEPTION
           WHEN NO_DATA_FOUND
             THEN DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
