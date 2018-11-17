@@ -40,7 +40,7 @@ CREATE OR REPLACE VIEW VIAJES_CLIENTES AS
   INNER JOIN CLIENTES     ON CLIENTES.ID            = VIAJES.ID_CLIENTE
   ORDER BY VIAJES.HORA_SALIDA DESC;
 
-
+  
 -- 3) Plan de ejecución para la ista VIAJES_CLIENTES
 explain plan set STATEMENT_ID = 'VIAJES_del_CLIENTES' FOR
 SELECT * FROM VIAJES_CLIENTES;
@@ -48,12 +48,11 @@ SELECT * FROM VIAJES_CLIENTES;
 -- Ver el plan de ejecución
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY('PLAN_TABLE','VIAJES_del_CLIENTES','TYPICAL'));
 
+-- Ejecución de la vista con un where por Nombre del cliente
+select * from viajes_clientes where NOMBRE_CLIENTE = 'Gerald Fandrey';
+
 -- Creación de indices para mejorar los costos del plan de ejecución
-CREATE UNIQUE INDEX index_viajes ON VIAJES ("ID");
-CREATE UNIQUE INDEX index_Ciudades ON Ciudades ("ID");
-
-DROP INDEX ord_customer_ix_demo;
-
+CREATE UNIQUE INDEX ind_viajes_nombre ON Clientes (Nombre);
 
 -- 4) para el punto 4, se puede hacer un select a la tabla Ciudades en donde se puede evidenciar la agregación
 -- de las nuevas 3 columnas: VALOR POR KM, VALOR POR MINUTO, TARIFA BASE.
@@ -66,26 +65,27 @@ CREATE OR REPLACE FUNCTION VALOR_DISTANCIA(Distancia float,Ciudad string)
     AS
     Valorkm float;
     Total_por_km float;
+    ex EXCEPTION;
     BEGIN
     --Se valida que la distancia no sea menor a 0
         IF DISTANCIA < 0
           THEN 
-            DBMS_OUTPUT.put_line('ERROR: DISTANCIA MENOR A 0');
-            RETURN NULL;
+            RAISE ex;
         END IF;
-        
         --Se obtiene el valor por kilometro
         Select Valor_por_km into Valorkm  from Ciudades
             where Nombre = Ciudad;
-            
         --Se calcula el total    
         Total_por_km := Valorkm * Distancia;  
         return Total_por_km;
-        
         --Se valida si el qry no encuentra datos se controla el error con el exeption
+        --Se controla la exepción de si la distancia es menor a 0
         EXCEPTION
-          WHEN NO_DATA_FOUND
-            THEN DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+          WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+          WHEN ex THEN
+            DBMS_OUTPUT.put_line('ERROR: DISTANCIA MENOR A 0');
+            RETURN NULL;
 END;
 
 -- 6) Funcion que permite recibir como parámetros de entrada una ciudad y una cantidad de minutos.
@@ -96,12 +96,12 @@ CREATE OR REPLACE FUNCTION VALOR_TIEMPO(MINUTOS float,Ciudad string)
     AS
     ValorMIN float;
     Total_por_MIN float;
+    ex EXCEPTION;
     BEGIN
     --Se valida que los minutos no sean menor a 0
         IF MINUTOS < 0
           THEN 
-            DBMS_OUTPUT.put_line('ERROR: MINUTOS MENOR A 0');
-            RETURN NULL;
+            raise ex;
         END IF;
         --Se consulta el valor por minuto
         Select Valor_por_minuto into ValorMIN  from Ciudades
@@ -110,9 +110,13 @@ CREATE OR REPLACE FUNCTION VALOR_TIEMPO(MINUTOS float,Ciudad string)
         Total_por_MIN := ValorMIN * MINUTOS;  
         return Total_por_MIN;
         --Se controla la exepciones si no encuentra data el qry
+        --Se controla la excpcion de si el tiempo es menor a0
         EXCEPTION
-          WHEN NO_DATA_FOUND
-            THEN DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+          WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+          WHEN ex THEN
+            DBMS_OUTPUT.put_line('ERROR: MINUTOS MENOR A 0');
+            RETURN NULL;
       
 END;
   
@@ -121,7 +125,7 @@ END;
 -- y la suma de los detalles adicionales del viaje, como peajes, reten etc y se actualiza el total del viaje
 CREATE OR REPLACE PROCEDURE CALCULAR_TARIFA (VIAJE IN INTEGER)
 IS
-ESTADO_VIAJE INTEGER;
+ESTADO_VIAJE varchar(64);
 VALOR_TARIFA_BASE FLOAT;
 VALOR_DIS FLOAT;
 VALOR_TIM FLOAT;
@@ -137,10 +141,9 @@ BEGIN
   FROM VIAJES
   WHERE ID = VIAJE;
   
-  IF ESTADO_VIAJE <> 1
+IF ESTADO_VIAJE <> 'REALIZADO'
     THEN UPDATE VIAJES SET TOTAL = 0 WHERE ID = VIAJE;
-  END IF;
-  
+ else    
   
 --BUSCAR VALOR DE LA TARIFA BASE, CIUDAD, DISTANCIA, TIEMPO RECORRIDO
   SELECT CIUDADES.TARIFA_BASE, CIUDADES.NOMBRE, VIAJES.DISTANCIA, VIAJES.TIEMPO_RECORRIDO INTO VALOR_TARIFA_BASE, CIUDAD, DISTANCI, TIEMPORECORRIDO
@@ -166,30 +169,31 @@ VALOR_TIM := VALOR_TIEMPO(TIEMPORECORRIDO, CIUDAD);
   TARIFA := VALOR_TARIFA_BASE + VALOR_DIS + VALOR_TIM + VALOR_DETALLE;
   UPDATE VIAJES SET TOTAL = TARIFA, SUBTOTAL = VALOR_DETALLE WHERE ID = VIAJE;
  END IF;
-
+END IF;
 END;
-
 
 -- Prueba de las funciones 
 DECLARE
   VALOR FLOAT;
   VALORTWO FLOAT;
 BEGIN
-  VALOR := VALOR_TIEMPO('21,84', 'Montpellier');
-  --VALOR := VALOR_TIEMPO(-5, 'MEDELLIN');
+  --VALOR := VALOR_TIEMPO('21,84', 'Montpellier');
+  VALOR := VALOR_TIEMPO(-5, 'MEDELLIN');
   DBMS_OUTPUT.PUT_LINE(VALOR);
   
-  VALORTWO := VALOR_DISTANCIA('55', 'Montpellier');
-  --VALOR := VALOR_DISTANCIA(-5, 'MEDELLIN');
+  --VALORTWO := VALOR_DISTANCIA('55', 'Montpellier');
+  VALOR := VALOR_DISTANCIA(-5, 'MEDELLIN');
   DBMS_OUTPUT.PUT_LINE(VALORTWO);
 END;
 
 -- Consultas para probar la data
-select * from ciudades;
-select * from viajes where id = 98;
-select * from DETALLES_VIAJE where id_viaje = 98;
-select sum(TOTAL) from DETALLES_VIAJE  where id_viaje = 98;
-update viajes set tiempo_recorrido = -2 where id = 98;
+select * from viajes where Estado <> 'REALIZADO';
+select * from viajes where id = 67;
+select * from viajes where id = 58;
+select * from DETALLES_VIAJE where id_viaje = 58;
+select * from DETALLES_VIAJE where id_viaje = 67;
+select sum(TOTAL) from DETALLES_VIAJE  where id_viaje = 67;
+update viajes set tiempo_recorrido = -2 where id = 67;
 
 -- Prueba del procedimiento
-EXECUTE CALCULAR_TARIFA('98');
+EXECUTE CALCULAR_TARIFA('67');
