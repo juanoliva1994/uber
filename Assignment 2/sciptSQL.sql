@@ -19,9 +19,14 @@ SELECT Clientes.ID as CLIENTE_ID,
     INNER JOIN MEDIOS_DE_PAGO ON CLIENTES.ID = MEDIOS_DE_PAGO.ID_CLIENTE 
     INNER JOIN COMPANIAS ON COMPANIAS.ID = CLIENTES.ID_COMPANIA;
     
+-- Prueba de la vista
+select * from MEDIOS_PAGO_CLIENTES where CLIENTE_ID = 61;
+
+
+    
 -- 2) Creacion de vista para obtener todos los viajes de los clientes ordenados cronologicamente
 CREATE OR REPLACE VIEW VIAJES_CLIENTES AS
-  SELECT 
+SELECT 
         VIAJES.HORA_SALIDA AS FECHA_VIAJE, 
         CONDUCTORES.NOMBRE AS NOMBRE_CONDUCTOR, 
         VEHICULOS.PLACA    AS PLACA_VEHICULO,
@@ -33,13 +38,16 @@ CREATE OR REPLACE VIEW VIAJES_CLIENTES AS
           ELSE 'FALSE'
         END                AS TARIFA_DINAMICA,
         SERVICIOS.NOMBRE   AS TIPO_SERVICIO
-  FROM VIAJES
-  INNER JOIN CONDUCTORES  ON CONDUCTORES.ID         = VIAJES.ID_CONDUCTOR
-  INNER JOIN SERVICIOS    ON SERVICIOS.ID           = VIAJES.ID_SERVICIO
-  INNER JOIN VEHICULOS    ON VEHICULOS.ID_SERVICIO  = VIAJES.ID_SERVICIO
-  INNER JOIN CLIENTES     ON CLIENTES.ID            = VIAJES.ID_CLIENTE
-  ORDER BY VIAJES.HORA_SALIDA DESC;
-
+  FROM CLIENTES
+  INNER JOIN VIAJES       ON VIAJES.ID_cliente         = CLIENTES.ID
+  INNER JOIN CONDUCTORES  ON VIAJES.ID_conductor       = CONDUCTORES.ID
+  INNER JOIN Conductores_y_vehiculos    ON conductores_y_vehiculos.id_conductor  = conductores.id
+  INNER JOIN vehiculos    ON vehiculos.ID              = conductores_y_vehiculos.id_vehiculo
+  INNER JOIN servicios    ON servicios.ID              = vehiculos.id_servicio
+  ORDER BY  FECHA_VIAJE desc; 
+      
+-- Prueba de la vista:
+select * from VIAJES_CLIENTES WHERE NOMBRE_CLIENTE = 'Bree Pyne'; 
   
 -- 3) Plan de ejecución para la ista VIAJES_CLIENTES
 explain plan set STATEMENT_ID = 'VIAJES_del_CLIENTES' FOR
@@ -49,7 +57,7 @@ SELECT * FROM VIAJES_CLIENTES;
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY('PLAN_TABLE','VIAJES_del_CLIENTES','TYPICAL'));
 
 -- Ejecución de la vista con un where por Nombre del cliente
-select * from viajes_clientes where NOMBRE_CLIENTE = 'Gerald Fandrey';
+select * from viajes_clientes where NOMBRE_CLIENTE = 'Bree Pyne';
 
 -- Creación de indices para mejorar los costos del plan de ejecución
 CREATE UNIQUE INDEX ind_viajes_nombre ON Clientes (Nombre);
@@ -83,9 +91,20 @@ CREATE OR REPLACE FUNCTION VALOR_DISTANCIA(Distancia float,Ciudad string)
         EXCEPTION
           WHEN NO_DATA_FOUND THEN
             DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+            RETURN NULL;
           WHEN ex THEN
             DBMS_OUTPUT.put_line('ERROR: DISTANCIA MENOR A 0');
             RETURN NULL;
+END;
+
+-- Prueba de las funciones 
+DECLARE
+  VALOR FLOAT;
+BEGIN  
+  --VALOR := VALOR_DISTANCIA('55', 'Montpellier');
+  --VALOR := VALOR_DISTANCIA(-5, 'MEDELLIN');
+  VALOR := VALOR_DISTANCIA(5, 'MEDELLIN');
+  DBMS_OUTPUT.PUT_LINE(VALOR);
 END;
 
 -- 6) Funcion que permite recibir como parámetros de entrada una ciudad y una cantidad de minutos.
@@ -114,11 +133,22 @@ CREATE OR REPLACE FUNCTION VALOR_TIEMPO(MINUTOS float,Ciudad string)
         EXCEPTION
           WHEN NO_DATA_FOUND THEN
             DBMS_OUTPUT.put_line('ERROR: NO SE ENCUENTRA CIUDAD');
+            RETURN NULL;
           WHEN ex THEN
             DBMS_OUTPUT.put_line('ERROR: MINUTOS MENOR A 0');
-            RETURN NULL;
-      
+            RETURN NULL;      
 END;
+
+-- Prueba de las funciones 
+DECLARE
+  VALOR FLOAT;
+  VALORTWO FLOAT;
+BEGIN
+  --VALOR := VALOR_TIEMPO('21,84', 'Montpellier');
+  --VALOR := VALOR_TIEMPO(-5, 'MEDELLIN');
+  VALOR := VALOR_TIEMPO(55, 'MEDELLIN');
+  DBMS_OUTPUT.PUT_LINE(VALOR);
+END;  
   
 -- 7) Procedimiento que me permite caluclar una tarifa.
 -- ésto se realiza con base a el viaje, tomando como base el viaje se busca el tiempo recorrido, la distancia recorrida
@@ -172,28 +202,15 @@ VALOR_TIM := VALOR_TIEMPO(TIEMPORECORRIDO, CIUDAD);
 END IF;
 END;
 
--- Prueba de las funciones 
-DECLARE
-  VALOR FLOAT;
-  VALORTWO FLOAT;
-BEGIN
-  --VALOR := VALOR_TIEMPO('21,84', 'Montpellier');
-  VALOR := VALOR_TIEMPO(-5, 'MEDELLIN');
-  DBMS_OUTPUT.PUT_LINE(VALOR);
-  
-  --VALORTWO := VALOR_DISTANCIA('55', 'Montpellier');
-  VALOR := VALOR_DISTANCIA(-5, 'MEDELLIN');
-  DBMS_OUTPUT.PUT_LINE(VALORTWO);
-END;
 
 -- Consultas para probar la data
 select * from viajes where Estado <> 'REALIZADO';
 select * from viajes where id = 67;
-select * from viajes where id = 58;
+select * from viajes where id = 12;
 select * from DETALLES_VIAJE where id_viaje = 58;
 select * from DETALLES_VIAJE where id_viaje = 67;
 select sum(TOTAL) from DETALLES_VIAJE  where id_viaje = 67;
 update viajes set tiempo_recorrido = -2 where id = 67;
 
 -- Prueba del procedimiento
-EXECUTE CALCULAR_TARIFA('67');
+EXECUTE CALCULAR_TARIFA('12'); 
